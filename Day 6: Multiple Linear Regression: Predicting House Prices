@@ -1,0 +1,28 @@
+import sys
+import pandas as pd
+from sklearn import linear_model
+
+a, n = map(int,sys.stdin.readline().split())
+
+tr =[]
+for line in range(n):
+    tr.append(sys.stdin.readline().split())
+
+n = int(sys.stdin.readline(),10)
+
+te =[]
+for line in range(n):
+    te.append(sys.stdin.readline().split())
+
+dfInput = pd.DataFrame(tr).iloc[:,0:a]
+
+dfOutput = pd.DataFrame(tr).iloc[:,a]
+
+dfTest =  pd.DataFrame(te)
+
+lm = linear_model.LinearRegression()
+model = lm.fit(dfInput,dfOutput)
+
+predictions = lm.predict(dfTest)
+
+print("\n".join(["{:0.2f}".format(x) for x in predictions]))
